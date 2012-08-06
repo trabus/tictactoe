@@ -1,5 +1,5 @@
 var Board = function(game){
-	this.resetMap();
+	this.resetBoard();
 	this.game = game;
 };
 
@@ -9,7 +9,7 @@ Board.prototype = {
 	map: [],
 	game: null,
 	winPatterns: [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]],
-	resetMap: function(){
+	resetBoard: function(){
 		this.map = [];
 		for(var i = 0; i < this.squares; i++){
 			this.map[i] = 0;
@@ -67,17 +67,21 @@ Board.prototype = {
 					hits += (square === pattern[0] ? 1 : 0)+(square === pattern[1] ? 1 : 0)+(square === pattern[2] ? 1 : 0);
 					//console.log("square "+j+" contents: "+rraSquares[j]+" hits: "+hits);
 					if (hits >= 3) {
+						/*
 						console.log("=======Checking Win Pattern=======");
 						console.log("pattern: "+pattern);
 						console.log("squares: "+squares);
 						console.log("square "+j+" contents: "+squares[j]+" hits: "+hits);
+						*/
 						isWinner = true;
 						break;
 					}
 				}
 				if(isWinner){
+					/*
 					console.log("WINNER: "+player.name);
 					console.log("===================================");
+					*/
 					break;
 				}
 			}

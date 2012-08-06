@@ -19,15 +19,15 @@ for(var i = 0, len = moves.length; i<len; i++){
 var getAvailableSquare = function(){
 	var squares = g.board.getAvailableSquares();
 	return squares[Math.floor(Math.random()*squares.length)];
-}
+};
 // analizes which strategies can still win and eliminates non-winning squares from the pool
 var getOptimalSquare = function(){
 
-}
+};
 // analizes if opponent has any squares that will cause a win and blocks
 var blockCheck = function(player){
 
-}
+};
 
 var AI = function(player){
 	// if the move fails, run again
@@ -47,7 +47,7 @@ var AI = function(player){
 		console.log("TIE GAME");
 		console.log("APP COMPLETE");
 	}
-}
+};
 AI(g.currentPlayer());
 /**
 NOTES and TODOS

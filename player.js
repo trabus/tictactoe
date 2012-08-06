@@ -7,7 +7,7 @@ var Player = function(nbrID, stgName, stgToken, ojtGame){
 
 Player.prototype = {
 	// start the user's  turn
-	startTurn: function(){
+	ß: function(){
 		// loop through and available map areas for user
 		for(var i = 0; i < this.game.board.squares; i++){
 			if(this.game.board.map[i] === 0) {

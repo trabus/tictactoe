@@ -13,7 +13,7 @@ Game.prototype = {
 		if(typeof ojtPlayerData === 'undefined') {
 			//ojtPlayerData = {bob:{name:'bob',token:'x'},dob:{name:'dob',token:'o'}};
 		}
-		console.log('init');
+		//console.log('init');
 		this.players = {};
 		this.playerStack = [];
 		this.board = new Board(this);
@@ -25,7 +25,7 @@ Game.prototype = {
 			player = ojtPlayerData[val];
 			this.addPlayer(player.name,player.token);
 		}
-		console.log(this.players);
+		//console.log(this.players);
 	},
 	turn: function () {
 
@@ -37,8 +37,8 @@ Game.prototype = {
 			var id = this.playerStack.length+1;
 			this.players[id] = new Player(id, stgName, stgToken, this);
 			this.playerStack.push(id);
-			console.log(id)
-			console.log(this.playerStack)
+			//console.log(id)
+			//console.log(this.playerStack)
 		}else{
 			console.log("over");
 		}
