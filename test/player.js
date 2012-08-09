@@ -1,6 +1,6 @@
 var assert = require("assert");
-var Player = require("../player");
-var Game = require("../game");
+var Player = require("../server/player");
+var Game = require("../server/game");
 describe('Player', function(){
 	describe('#startTurn()', function(){
 		

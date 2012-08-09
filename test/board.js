@@ -1,7 +1,7 @@
 var assert = require("assert");
-var Board = require('../board');
-var Player = require('../player');
-var Game = require('../game');
+var Board = require('../server/board');
+var Player = require('../server/player');
+var Game = require('../server/game');
 describe('Board', function(){
 	var g, b, p;
 	beforeEach(function(){
