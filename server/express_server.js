@@ -5,8 +5,8 @@ var game = {id:1};
 
 app.configure(function(){
 	app.use(express.logger());
-	app.use(express.static(__dirname + "/static"));
-	app.set('views', __dirname + '/views');
+	app.use(express.static(__dirname + "/../static"));
+	app.set('views', __dirname + '/../views');
   	app.set('view engine', 'jade');
   	app.use(express.bodyParser());
   	//app.use(express.methodOverride());
