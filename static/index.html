@@ -1,0 +1,43 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/jquery.1.7.2-min.js"></script>
+	<script type="text/javascript" src="js/lodash.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$(".content").html(_.template($('#tmpBoard').html())());
+		});
+	</script>
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+	<body>
+		<div class="content"></div> 
+	</body>
+	
+<!-- BEGIN TEMPLATES -->
+	<script type="text/html" id="tmpLobby">
+
+	</script>
+	<script type="text/html" id="tmpBoard">
+		<div class="board">
+			<% 	
+			var i = 1;
+			var row = ["one","two","three"];
+			var col = ["one","two","three"];
+			for(var r=0,rowlen= 3; r<rowlen; r++){ 
+			%>
+				<div class="row <%= row[r] %>">
+					<% for(var c=0,collen = 3; c<collen; c++){ %>
+						<div class="col <%= col[c] %>">
+							<div class="square center mid" id="square<%= i %>">
+								<div class="front"></div>
+								<div class="back"></div>
+							</div>
+						</div>
+					<% i++; }; %>
+				</div>
+			<% }; %>
+		</div>
+	</script>
+<!-- END TEMPLATES -->
+</html>
