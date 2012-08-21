@@ -19,14 +19,18 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
+// was using jade, now just serving static html and js
 app.get('/', function(request,response){
 	//response.render('root',{title:"tictactoe"});
-	//console.log("sending index");
-	response.send({shit:"index.html"});
 });
+// test rendering square template
+
 app.get('/square',function(request, response){
 	response.render('squaretest',{title:"square"});
 });
+
+// api test for ajax call
+// still just a concept, need to work out details
 app.get('/game', function(request, response){
 	//request.id;
 	if(request.param("id")==game.id){

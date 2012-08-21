@@ -1,44 +1,28 @@
-html
-	head
-	body
+
+extends layout
+include square
+
+block content
 	.content
 		.board
 			.row.one
 				.col.one
-					#square1.square.center.mid
-						.front
-						.back
+					mixin square({id:1})
 				.col.two
-					#square2.square.center.mid
-						.front
-						.back
+					mixin square({id:2})
 				.col.three
-					#square.square.center.mid
-						.front
-						.back
+					mixin square({id:3})
 			.row.two
 				.col.one
-					#square4.square.center.mid
-						.front
-						.back
+					mixin square({id:4})
 				.col.two
-					#square5.square.center.mid
-						.front
-						.back
+					mixin square({id:5})
 				.col.three
-					#square6.square.center.mid
-						.front
-						.back			
+					mixin square({id:6})			
 			.row.three
 				.col.one
-					#square7.square.center.mid
-						.front
-						.back
+					mixin square({id:7})
 				.col.two
-					#square8.square.center.mid
-						.front
-						.back
+					mixin square({id:8})
 				.col.three
-					#square9.square.center.mid
-						.front
-						.back
+					mixin square({id:9})

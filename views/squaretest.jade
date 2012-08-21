@@ -1,0 +1,11 @@
+
+extends layout
+include square
+
+block content
+	.content
+		.board
+			rows = ["one","two","three"]
+			each row, i in rows
+				mixin row(row)
+				

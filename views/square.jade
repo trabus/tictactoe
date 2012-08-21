@@ -1,0 +1,15 @@
+mixin square(item)
+	#{'div id=#square'+item.id}.square.center.mid
+		.front
+		.back
+
+mixin row(id)
+	#{'div class="'+id+' row"'}
+	- var cols = ["one","two","three"]
+	each col, j in cols
+		mixin col(col)
+			- var pos = i + j
+			mixin square({id:"#square"+pos})
+
+mixin col(id)
+	#{'div class="'+id+' col"'}

@@ -12,4 +12,16 @@ $(document).ready(function(){
 			}
 		}
 	});
+	// BS ajax test to try out the "api" 
+	$.ajax({
+		url:'game/',
+		data:{id:1,move:1,player:"bob"},
+		success:function(data){
+			console.log(data); 
+			$("#square"+data.move).toggleClass("clicked"); 
+			$("#square"+data.move).find("div.back").addClass("x");
+		}
+	});
 });
+// use translate3d for x and y transitions
+// remove elements and add as scrolling limit to 4 or 5
