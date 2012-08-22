@@ -101,6 +101,11 @@ Board.prototype = {
 		//console.log("getToken: "+token);
 		return token;
 	},
+	getPlayerAtSquare: function(square) {
+		var player = this.game.players[this.map[square]];
+		return player;
+	},
+	
 	// loop through squares and return an array containing positions occupied by player
 	getPlayerSquares: function(player){
 		var squares = [];

@@ -1,7 +1,9 @@
 var express = require("express");
+var Game = require("./server/game");
 
 var app = express();
-var game = {id:1};
+var game = new Game(1,{bob:{name:'bob',token:'x'},dob:{name:'dob',token:'o'}});
+game.currentPlayer().startTurn();
 
 app.use(express.logger());
 app.use(express.errorHandler()); 
@@ -33,10 +35,27 @@ app.get('/square',function(request, response){
 // still just a concept, need to work out details
 app.get('/game', function(request, response){
 	//request.id;
-	if(request.param("id")==game.id){
-		response.send({ id: request.param("id"), move:request.param("move"), player:request.param("player") })
+	if(request.param("id") == game.id && !game.over){
+		var player = game.currentPlayer();
+		var move = request.param("move");
+		if(player.name !== request.param("player")){
+			response.send({id: game.id, message:request.param("player")+" is not the current player!"});
+		}else{
+			if(!player.move(move-1)){
+				response.send({id: game.id, message:"Move failed, space "+move+" is occupied by "+game.board.getPlayerAtSquare(move-1).name+"."})
+			}else{
+				//player.endTurn();
+				response.send({id: game.id, message:"Move succeeded!", move:move, token:player.token, action:"move"});
+			}
+		}
+		//response.send({ id: request.param("id"), move:request.param("move"), player:request.param("player") })
 	}else{
-		response.send({ id:"invalid", player:"none"});
+		if(game.over){
+			response.send({id: game.id, message:"Game "+game.id+" is over!",action:"reset"});
+			game = new Game(1,{bob:{name:'bob',token:'x'},dob:{name:'dob',token:'o'}});
+		}else{
+			response.send({ id:"invalid", message:"No game by that id exists"});
+		}
 	}
 });
 

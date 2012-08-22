@@ -34,8 +34,8 @@ Player.prototype = {
 							this.game.over = true;
 						}else{
 							this.endTurn();
-							return true;
 						}
+						return true;
 					}	
 				}else{
 					console.log('only 9 squares, '+position+' is invalid');

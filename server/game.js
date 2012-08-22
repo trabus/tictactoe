@@ -1,10 +1,12 @@
 var Board = require('./board');
 var Player = require('./player');
-var Game = function(ojtPlayerData){
+var Game = function(id,ojtPlayerData){
+	this.id = id;
 	this.init(ojtPlayerData);
 };
 
 Game.prototype = {
+	id:null,
 	winner: 0,
 	maxPlayers: 2,
 	over: false,
@@ -28,7 +30,6 @@ Game.prototype = {
 		//console.log(this.players);
 	},
 	turn: function () {
-
 		var player = this.currentPlayer();
 		player.startTurn();
 	},
