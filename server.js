@@ -31,7 +31,7 @@ app.get('/', function(req,res){
 	//res.render('root',{title:"tictactoe"});
 });
 
-app.get('/lobby', function(req,res)){
+app.get('/lobby', function(req,res){
 	res.send(lobby);
 });
 // test rendering square template
