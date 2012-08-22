@@ -12,6 +12,29 @@
 			position:relative;
 			box-sizing:border-box;
 		}
+		#nav{
+			display:block;
+			width:100%;
+			height:40px;
+			padding:10px;
+			box-shadow: 4px 4px 10px #333;
+		}
+		#nav div.username, #nav div.totalUsers{
+			display:inline-block;
+			font-family:Arial;
+			font-size: 140%;
+			font-weight: bolder;
+			color:#FFF;
+		}
+		#nav div.totalUsers{
+			position:absolute;
+			right:100px;
+		}
+
+		#main{
+			width:100%;
+			height:100%;
+		}
 		.content{
 			width:100%;
 			height:100%;

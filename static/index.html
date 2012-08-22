@@ -1,22 +1,47 @@
 <html>
 <head>
 	<link rel="stylesheet" href="css/style.css">
-	<script type="text/javascript" src="js/jquery.1.7.2-min.js"></script>
-	<script type="text/javascript" src="js/lodash.min.js"></script>
+	<script src="js/jquery.1.7.2-min.js"></script>
+	<script src="js/lodash.min.js"></script>
+	<script src="js/backbone-min.0.9.2.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$(".content").html(_.template($('#tmpBoard').html())());
+			$("#nav").html(_.template($('#tmpNav').html())({username:"bob",usercount:0}));
+			//$("#main").html(_.template($('#tmpBoard').html())());
+			$("#main").html(_.template($('#tmpLobby').html()));
 		});
 	</script>
 	<script type="text/javascript" src="js/main.js"></script>
+		<script src="js/app.js"></script>
 </head>
 	<body>
-		<div class="content"></div> 
+		<div id="nav"></div>
+		<div id="main"></div>
 	</body>
-	
-<!-- BEGIN TEMPLATES -->
-	<script type="text/html" id="tmpLobby">
 
+<!-- BEGIN TEMPLATES -->
+	<script type="text/html" id="tmpNav">
+		<div class="username"><%= username %></div>
+		<div class="totalUsers"><%= usercount %></div>
+		<div class="leaveButton"></div>
+	</script>
+	<script type="text/html" id="tmpLobby">
+		<div class="lobby">
+		<h1>Tic Tac Toe Lobby</h1>
+		<div class="content"></div>
+		</div>
+	</script>
+	<script type="text/html" id="tmpPlayerList">
+			<h2>Playerlist</h2>
+			<ul class="playerlist">
+			</ul>
+	</script>
+	<script type="text/html" id="tmpPlayer">
+		<li class="player">
+			<p class="username"><%= username %></p>
+
+		</li>
 	</script>
 	<script type="text/html" id="tmpBoard">
 		<div class="board">

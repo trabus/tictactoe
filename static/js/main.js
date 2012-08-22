@@ -1,4 +1,11 @@
 $(document).ready(function(){
+	var socket = io.connect('http://localhost');
+	var username = "bob";
+	// joining the lobby
+  	socket.on('lobby', function (data) {
+    	console.log(data);
+    	socket.emit('joinlobby', { username: username });
+  	});
 	$(".square").on("click", function(){
 		var square = $(this).find("div.back");
 		/*
@@ -13,6 +20,7 @@ $(document).ready(function(){
 			}
 		}*/
 		var move = Number($(this).attr("id").substr(-1,1));
+		/*
 		$.ajax({
 			url:'game/',
 			data:{id:1,move:move,player:"bob"},
@@ -23,6 +31,7 @@ $(document).ready(function(){
 				$("#square"+data.move).find("div.back").addClass(data.token);
 			}
 		});
+		*/
 	});
 	// BS ajax test to try out the "api" 
 	/*
