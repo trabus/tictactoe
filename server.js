@@ -6,9 +6,12 @@ var app = express();
 var server = require('http').createServer(app)
 io = io.listen(server);
 
-var game = new Game(1,{bob:{name:'bob',token:'x'},dob:{name:'dob',token:'o'}});
-var lobby = {};
-game.currentPlayer().startTurn();
+//var game = new Game(1,{bob:{name:'bob',token:'x'},dob:{name:'dob',token:'o'}});
+// playerlist to contain all players connected to the lobby
+var playerList = {};
+var playerCount = 0;
+var lobbyList = {};
+//game.currentPlayer().startTurn();
 
 app.use(express.logger());
 app.use(express.errorHandler()); 
@@ -32,8 +35,53 @@ app.get('/', function(req,res){
 });
 
 app.get('/lobby', function(req,res){
-	res.send(lobby);
+	res.send(playerList);
 });
+
+
+//app.listen(8000);
+server.listen(8000);
+
+// setup socket
+io.sockets.on('connection', function (socket) {
+	// lobby
+	/*
+	socket.on('player:joinLobby', function (data, callback){
+
+	})
+*/
+	//socket.emit('lobby', { users: lobby });
+	// joinlobby
+	socket.on('joinLobby', function (data) {
+    	console.log(data);
+    	if(typeof(playerList[data.username]) === 'undefined'){
+    		playerCount++;
+    		socket.username = data.username;
+    		playerList[data.username] = {id:playerCount, username:data.username, status:"in lobby"};
+    		lobbyList[data.username] = playerList[data.username];
+    		socket.emit('playerJoin',{username:data.username});
+    		io.sockets.emit('lobbyUpdate',lobbyList);
+    		console.log(lobbyList);
+    	}else{
+    		socket.emit('playerJoin',{ message:'username '+data.username+' is already taken'});
+    	}
+  	});
+  	// leavelobby
+  	socket.on('leaveLobby', function (data) {
+  		delete lobbyList[data.username];
+  		io.sockets.emit('lobbyUpdate',lobbyList);
+  	});
+  	socket.on('disconnect', function () {
+  		if(playerList[socket.username]){
+  			console.log(socket.username+" left");
+  			io.sockets.emit('playerLeave', playerList[socket.username]);
+  			delete playerList[socket.username];
+  			delete lobbyList[socket.username];
+  			//io.sockets.emit('lobbyUpdate',lobbyList);
+  		}
+  	});
+});
+
 // test rendering square template
 /*
 app.get('/square',function(req, res){
@@ -68,21 +116,3 @@ app.get('/game', function(req, res){
 	}
 });
 */
-
-//app.listen(8000);
-server.listen(8000);
-
-// setup socket
-io.sockets.on('connection', function (socket) {
-	// lobby
-	socket.emit('lobby', { users: lobby });
-	// joinlobby
-	socket.on('joinLobby', function (data) {
-    console.log(data);
-    if(!lobby[data.username]){
-    	lobby[data.username] = {name:data.username};
-    }else{
-    	socket.emit('usernameTaken',{ message:'username '+data.username+' is already taken'});
-    }
-  });
-});

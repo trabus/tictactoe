@@ -5,15 +5,8 @@
 	<script src="js/lodash.min.js"></script>
 	<script src="js/backbone-min.0.9.2.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$("#nav").html(_.template($('#tmpNav').html())({username:"bob",usercount:0}));
-			//$("#main").html(_.template($('#tmpBoard').html())());
-			$("#main").html(_.template($('#tmpLobby').html()));
-		});
-	</script>
-	<script type="text/javascript" src="js/main.js"></script>
-		<script src="js/app.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/app.js"></script>
 </head>
 	<body>
 		<div id="nav"></div>
@@ -26,10 +19,22 @@
 		<div class="totalUsers"><%= usercount %></div>
 		<div class="leaveButton"></div>
 	</script>
+	<script type="text/html" id="tmpLobbyJoin">
+		<div id="join">
+			<div class="modal">
+				<h1>Join the lobby</h1>
+				<p>Pick your username</p>
+				<form>
+					<input type="text" name="username" id="username"></input>
+					<input type="submit" id='join' value="join" onclick="return false"></input>
+				</form>
+			</div>
+		</div>
+	</script>
 	<script type="text/html" id="tmpLobby">
-		<div class="lobby">
+		<div id="lobby">
 		<h1>Tic Tac Toe Lobby</h1>
-		<div class="content"></div>
+		<div id="content"></div>
 		</div>
 	</script>
 	<script type="text/html" id="tmpPlayerList">
@@ -38,10 +43,8 @@
 			</ul>
 	</script>
 	<script type="text/html" id="tmpPlayer">
-		<li class="player">
-			<p class="username"><%= username %></p>
-
-		</li>
+			<span class="username"><%= username %></span>
+			<span class="status"><%= status %></span>
 	</script>
 	<script type="text/html" id="tmpBoard">
 		<div class="board">

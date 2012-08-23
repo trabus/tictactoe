@@ -2,10 +2,11 @@ $(document).ready(function(){
 	var socket = io.connect('http://localhost');
 	var username = "bob";
 	// joining the lobby
-  	socket.on('lobby', function (data) {
-    	console.log(data);
-    	socket.emit('joinlobby', { username: username });
-  	});
+  	socket.on('playerJoin', function (data) {
+    	console.log('playerJoin',data);
+    });
+    	//socket.emit('joinlobby', { username: username });
+  	
 	$(".square").on("click", function(){
 		var square = $(this).find("div.back");
 		/*
