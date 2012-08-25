@@ -57,7 +57,7 @@ app.get('/lobby', function(req,res){
 
 
 //app.listen(8000);
-server.listen(8000, '10.221.208.165');
+server.listen(8000);
 
 // setup socket
 io.sockets.on('connection', function (socket) {

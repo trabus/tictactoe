@@ -2,7 +2,7 @@ $(function(){
 	var username, id, token, lobbyView, lobbyJoinView;
 	var gameOver = false;
 	var myTurn = false;
-	var socket = io.connect('http://10.221.208.165:8000');//io.connect('http://localhost');
+	var socket = io.connect();//'http://localhost');
 	var Nav = Backbone.Model.extend({defaults:{username:"anon",usercount:0}});
 	var Player = Backbone.Model.extend({defaults:{id:0, username:"anon", className:"player"}});
 	var Session = Backbone.Model.extend();
