@@ -2,7 +2,23 @@
 <head>
 	<link rel="stylesheet" href="static/css/style.css">
 	<script type="text/javascript" src="static/js/jquery.1.7.2-min.js"></script>
-	<script type="text/javascript" src="static/js/main.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".square").on("click", function(){
+			var square = $(this).find("div.back");
+			$(this).toggleClass("clicked");
+			if($(this).hasClass("clicked")){
+				if(square.hasClass("x")){
+					square.removeClass("x").addClass("o");
+				}else if(square.hasClass("o")){
+					square.removeClass("o").addClass("x");
+				}else{
+					square.addClass("x");
+				}
+			}
+		});
+	});
+	</script>
 </head>
 <body>
 	<div class="content">

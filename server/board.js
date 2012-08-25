@@ -82,6 +82,7 @@ Board.prototype = {
 					console.log("WINNER: "+player.name);
 					console.log("===================================");
 					*/
+					this.game.winner = player.name;
 					break;
 				}
 			}
@@ -105,7 +106,7 @@ Board.prototype = {
 		var player = this.game.players[this.map[square]];
 		return player;
 	},
-	
+
 	// loop through squares and return an array containing positions occupied by player
 	getPlayerSquares: function(player){
 		var squares = [];
@@ -137,6 +138,7 @@ Board.prototype = {
 		if(this.getAvailableSquares().length > 0){
 			return true;
 		}else{
+			this.game.over = true;
 			return false;
 		}
 	},

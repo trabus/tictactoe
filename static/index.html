@@ -5,7 +5,6 @@
 	<script src="js/lodash.min.js"></script>
 	<script src="js/backbone-min.0.9.2.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="js/main.js"></script>
 	<script src="js/app.js"></script>
 </head>
 	<body>
@@ -16,7 +15,8 @@
 <!-- BEGIN TEMPLATES -->
 	<script type="text/html" id="tmpNav">
 		<div class="username"><%= username %></div>
-		<div class="totalUsers"><%= usercount %></div>
+		<div class="opponent"><%= opponent %></div>
+		<div class="totalUsers">players online: <%= usercount %></div>
 		<div class="leaveButton"></div>
 	</script>
 	<script type="text/html" id="tmpLobbyJoin">
@@ -24,16 +24,14 @@
 			<div class="modal">
 				<h1>Join the lobby</h1>
 				<p>Pick your username</p>
-				<form>
-					<input type="text" name="username" id="username"></input>
-					<input type="submit" id='join' value="join" onclick="return false"></input>
-				</form>
+				<input type="text" name="username" id="username"></input>
+				<button id='joinButton'>join</button>
 			</div>
 		</div>
 	</script>
 	<script type="text/html" id="tmpLobby">
 		<div id="lobby">
-		<h1>Tic Tac Toe Lobby</h1>
+		<h1>Tic Tac WHOA!</h1>
 		<div id="content"></div>
 		</div>
 	</script>
@@ -45,9 +43,17 @@
 	<script type="text/html" id="tmpPlayer">
 			<span class="username"><%= username %></span>
 			<span class="status"><%= status %></span>
+			<span class="buttons"><% if(available){ %> <button>join</button> <% } %></span>
+	</script>
+	<script type="text/html" id="tmpGameOver">
+		<div class="modal">
+			<h1>Game Over!</h1>
+			<p><%= winner %> won!</p>
+			<button>click here to go back to the lobby</button>
+		</div>
 	</script>
 	<script type="text/html" id="tmpBoard">
-		<div class="board">
+		<div id="board">
 			<% 	
 			var i = 1;
 			var row = ["one","two","three"];

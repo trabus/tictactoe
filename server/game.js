@@ -7,7 +7,7 @@ var Game = function(id,ojtPlayerData){
 
 Game.prototype = {
 	id:null,
-	winner: 0,
+	winner: "none",
 	maxPlayers: 2,
 	over: false,
 	init: function (ojtPlayerData) {
@@ -20,7 +20,7 @@ Game.prototype = {
 		this.playerStack = [];
 		this.board = new Board(this);
 		this.over = false;
-		this.winner = 0;
+		this.winner = "none";
 		this.board.moves = 0;
 		for(val in ojtPlayerData){
 			console.log(val);
