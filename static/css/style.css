@@ -172,20 +172,6 @@
 		.col:hover{
 			z-index: 2;
 		}
-/*
-		.left.square{
-			-webkit-transform-origin: 0% 0%;
-		}
-		.center.top.square, .center.mid.square{
-			-webkit-transform-origin: 50% 0%;
-		}
-		.center.bottom.square{
-			-webkit-transform-origin: 50% 100%;
-		}
-		.right.square{
-			-webkit-transform-origin: 100% 100%;
-		}
-		*/
 		.square {
 			position:absolute;
 			width:100%;
@@ -234,19 +220,3 @@
 		.square.clicked {
 			-webkit-transform: rotateY(180deg);
 		}
-		/*
-		.left.square.clicked {
-			-webkit-transform: rotateY(180deg);
-		}
-		.right.square.clicked{
-			-webkit-transform: rotateY(-180deg);
-		}
-		.center.top.square.clicked{
-			-webkit-transform: rotateX(-180deg);
-		}
-		.center.mid.square.clicked{
-			-webkit-transform: rotateY(180deg);
-		}
-		.center.bottom.square.clicked{
-			-webkit-transform: rotateX(-180deg);
-		}*/

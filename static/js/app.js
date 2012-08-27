@@ -2,7 +2,9 @@ $(function(){
 	var username, id, token, lobbyView, lobbyJoinView;
 	var gameOver = false;
 	var myTurn = false;
+	// socket connection
 	var socket = io.connect();//'http://localhost');
+	// models
 	var Nav = Backbone.Model.extend({defaults:{username:"anon",usercount:0}});
 	var Player = Backbone.Model.extend({defaults:{id:0, username:"anon", className:"player"}});
 	var Session = Backbone.Model.extend();
@@ -267,23 +269,20 @@ $(function(){
 		square.addClass(data.token);
 		myTurn = true;
     });
-
+    // gameover - locks out moves and launches gameover view
     socket.on('gameOver', function (data) {
-    	console.log('gameover',data)
+    	//console.log('gameover',data)
     	gameOver = true;
     	myTurn = false;
     	var gameOverView = new GameOverView({model:data});
     });
 
-    // leaveGame
+    // leaveGame - alerts player that opponent left the game
     socket.on('leaveGame', function (data) {
-    	// leave current game and join lobby
-    	console.log('leaveGame');
-    	// alert opponent player left
+    	//console.log('leaveGame');
+    	// clear opponent in nav
     	nav.set('opponent',"");
     	gameOver = true;
     	var gameOverView = new GameOverView({model:{winner:username}});
     });
-
-
 });

@@ -61,13 +61,7 @@ server.listen(8000);
 
 // setup socket
 io.sockets.on('connection', function (socket) {
-	// lobby
-	/*
-	socket.on('player:joinLobby', function (data, callback){
 
-	})
-*/
-	//socket.emit('lobby', { users: lobby });
 	// joinlobby
 	socket.on('joinLobby', function (data) {
     	console.log(data);
@@ -94,13 +88,20 @@ io.sockets.on('connection', function (socket) {
   	// joingame confirmation -> user is being joined by another player, confirm
   	socket.on('joinGame', function (data){
   		// set opponent
-  		console.log('joingame',data)
+  		//console.log('joingame',data)
+  		// set the response
   		var joinResponse = data.host ? 'joinGame' : 'joinGameConfirm';
+  		// set the token
   		var token = data.host ? 'x' : 'o';
+  		// set the opponent token
   		var opponentToken = data.host ? 'o' : 'x';
+  		// reference player
   		var player = playerList[socket.username];
+  		// set opponent
   		socket.opponent = data.opponent;
+  		// set status
   		player.status = statuses.game.title;
+  		// set player unavailable
   		player.available = false;
   		socket.broadcast.emit('statusUpdate',player);
   		sockets[socket.opponent].emit(joinResponse,{opponent:socket.username});
@@ -140,18 +141,23 @@ io.sockets.on('connection', function (socket) {
   		socket.emit('lobbyUpdate',lobbyList);
   		delete gameList[socket.username];
   	});
+  	// disconnect
   	socket.on('disconnect', function () {
+  		// if the player exists
   		if(playerList[socket.username]){
-  			console.log(socket.username+" left");
+  			//console.log(socket.username+" left");
+  			// broadcast player leaving to clean up lobby list or end any current games the player is in
   			socket.broadcast.emit('playerLeave', playerList[socket.username]);
+  			// if the player has an opponent
   			if(typeof(socket.opponent) !== 'undefined'){
+  				// if the socket reference for the opponent still exists, send leaveGame event
 				if(typeof(sockets[socket.opponent]) !== 'undefined') sockets[socket.opponent].emit('leaveGame');
 			}
+			// clean up lists
   			delete playerList[socket.username];
   			delete lobbyList[socket.username];
   			delete gameList[socket.username];
   			delete sockets[socket.username];
-  			//io.sockets.emit('lobbyUpdate',lobbyList);
   		}
   	});
 
